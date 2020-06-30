@@ -1,82 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.IO;
+
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace ESGI.DesignPattern.Projet
 {
+
+
     public class OrdersWriter
     {
-        private Orders orders;
 
-        public OrdersWriter(Orders orders)
+        private List<Order> Orders;
+
+        private XmlWriterSettings Settings;
+
+        public OrdersWriter(List<Order> orders)
         {
-            this.orders = orders;
+            this.Orders = orders;
+            this.Settings = new XmlWriterSettings();
+            this.Settings.Indent = false;
+            this.Settings.NewLineHandling = NewLineHandling.None;
+            this.Settings.OmitXmlDeclaration = true;
         }
 
-        public string GetContents()
+        public string Serialize()
         {
-            StringBuilder xml = new StringBuilder();
-            xml.Append("<orders>");
-            for (int i = 0; i < this.orders.OrderCount(); i++)
-            {
-                Order order = this.orders.Order(i);
-                xml.Append("<order");
-                xml.Append(" id='");
-                xml.Append(order.OrderId());
-                xml.Append("'>");
-                for (int j = 0; j < order.ProductCount(); j++)
-                {
-                    Product product = order.Product(j);
-                    xml.Append("<product");
-                    xml.Append(" id='");
-                    xml.Append(product.ID);
-                    xml.Append("'");
-                    xml.Append(" color='");
-                    xml.Append(this.ColorFor(product));
-                    xml.Append("'");
-                    if (product.Size != (int)ProductSize.NotApplicable)
-                    {
-                        xml.Append(" size='");
-                        xml.Append(this.SizeFor(product));
-                        xml.Append("'");
-                    }
-
-                    xml.Append(">");
-                    xml.Append("<price");
-                    xml.Append(" currency='");
-                    xml.Append(this.CurrencyFor(product));
-                    xml.Append("'>");
-                    xml.Append(product.Price);
-                    xml.Append("</price>");
-                    xml.Append(product.Name);
-                    xml.Append("</product>");
-                }
-
-                xml.Append("</order>");
-            }
-
-            xml.Append("</orders>");
-            return xml.ToString();
-        }
-
-        private string CurrencyFor(Product product)
-        {
-            return "USD";
-        }
-
-        private string SizeFor(Product product)
-        {
-            switch (product.Size)
-            {
-                case ProductSize.Medium:
-                    return "medium";
-                default:
-                    return "NOT APPLICABLE";
-            }
-        }
-
-        private string ColorFor(Product product)
-        {
-            return "red";
+            var writer = new StringWriter();
+            var xmlWriter = XmlWriter.Create(writer, this.Settings);
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add("", "");
+            new XmlSerializer(typeof(List<Order>), new XmlRootAttribute("orders")).Serialize(xmlWriter, this.Orders, namespaces);
+            return writer.ToString();
         }
     }
 }

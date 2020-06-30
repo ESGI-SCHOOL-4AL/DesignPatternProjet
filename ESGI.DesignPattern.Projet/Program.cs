@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ESGI.DesignPattern.Projet
 {
@@ -6,7 +7,7 @@ namespace ESGI.DesignPattern.Projet
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello world");
         }
     }
 }

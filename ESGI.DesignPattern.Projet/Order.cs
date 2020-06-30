@@ -1,36 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace ESGI.DesignPattern.Projet
 {
+    [XmlType("order")]
     public class Order
     {
-        private readonly int id;
-        private List<Product> products;
+        [XmlAttribute("id")]
+        public int ID { get; set; }
+
+        [XmlElement("product")]
+        public List<Product> Products { get; set; }
+
+        public Order() {}
 
         public Order(int id)
         {
-            this.products = new List<Product>();
-            this.id = id;
-        }
-
-        public int OrderId()
-        {
-            return this.id;
-        }
-
-        public void Add(Product product)
-        {
-            this.products.Add(product);
-        }
-
-        public int ProductCount()
-        {
-            return this.products.Count;
-        }
-
-        public Product Product(int insertionIndex)
-        {
-            return this.products[insertionIndex];
+            this.Products = new List<Product>();
+            this.ID = id;
         }
     }
 }
