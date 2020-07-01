@@ -23,7 +23,6 @@ namespace ESGI.DesignPattern.Projet
 
         public Product() {}
 
-        // TODO too many parameters
         public Product(int id, string name, ProductSize size, Price price, Color color)
         {
             this.ID = id;
