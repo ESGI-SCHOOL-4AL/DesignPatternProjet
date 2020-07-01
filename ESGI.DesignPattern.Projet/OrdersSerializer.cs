@@ -9,14 +9,14 @@ namespace ESGI.DesignPattern.Projet
 {
 
 
-    public class OrdersWriter
+    public class OrdersSerializer
     {
 
         private List<Order> Orders;
 
         private XmlWriterSettings Settings;
 
-        public OrdersWriter(List<Order> orders)
+        public OrdersSerializer(List<Order> orders)
         {
             this.Orders = orders;
             this.Settings = new XmlWriterSettings();

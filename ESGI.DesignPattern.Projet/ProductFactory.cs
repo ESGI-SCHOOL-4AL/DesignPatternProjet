@@ -1,9 +1,9 @@
 namespace ESGI.DesignPattern.Projet
 {
-    public class ProductFactory: IFactory<Product> {
+    public class ProductBuiler: IFactory<Product> {
         private Product product;
 
-        public ProductFactory(int id, string name) {
+        public ProductBuiler(int id, string name) {
             product = new Product(id, name, ProductSize.Medium, new Price(0, Currency.USD), Color.RED);
         }
 
@@ -11,27 +11,27 @@ namespace ESGI.DesignPattern.Projet
             return product;
         }
 
-        public ProductFactory WithID(int id) {
+        public ProductBuiler WithID(int id) {
             product.ID = id;
             return this;
         }
 
-        public ProductFactory WithName(string name) {
+        public ProductBuiler WithName(string name) {
             product.Name = name;
             return this;
         }
 
-        public ProductFactory WithSize(ProductSize size) {
+        public ProductBuiler WithSize(ProductSize size) {
             product.Size = size;
             return this;
         }
 
-        public ProductFactory WithPrice(Price price) {
+        public ProductBuiler WithPrice(Price price) {
             product.Price = price;
             return this;
         }
 
-        public ProductFactory WithColor(Color color) {
+        public ProductBuiler WithColor(Color color) {
             product.Color = color;
             return this;
         }

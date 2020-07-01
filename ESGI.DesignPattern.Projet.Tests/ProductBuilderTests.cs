@@ -1,17 +1,17 @@
 using Xunit;
 
 namespace ESGI.DesignPattern.Projet.Tests {
-    public class ProductFactoryTests {
+    public class ProductBuilderTests {
         private const int TEST_ID = 134;
         private const string TEST_NAME = "Test Product";
 
         [Fact]
         public void DefaultBuildedProductValues()
         {
-            ProductFactory factoryTest = new ProductFactory(TEST_ID, TEST_NAME);
+            ProductBuiler builderTest = new ProductBuiler(TEST_ID, TEST_NAME);
             Product expectedProduct = new Product(TEST_ID, TEST_NAME, ProductSize.Medium, new Price(0, Currency.USD), Color.RED);
 
-            Product factoryOutput = factoryTest.Build();
+            Product factoryOutput = builderTest.Build();
             Assert.Equal(expectedProduct.ID, factoryOutput.ID);
             Assert.Equal(expectedProduct.Name, factoryOutput.Name);
             Assert.Equal(expectedProduct.Size, factoryOutput.Size);
@@ -27,7 +27,7 @@ namespace ESGI.DesignPattern.Projet.Tests {
             Price newPrice = new Price(20, Currency.USD);
             ProductSize newSize = ProductSize.ExtraLarge;
 
-            ProductFactory factoryTest = new ProductFactory(TEST_ID, TEST_NAME);
+            ProductBuiler factoryTest = new ProductBuiler(TEST_ID, TEST_NAME);
             Product factoryOutput = factoryTest.WithPrice(newPrice).WithSize(newSize).Build();
 
             Assert.Equal(newPrice.Value, factoryOutput.Price.Value);
