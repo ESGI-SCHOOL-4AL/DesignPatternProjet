@@ -8,7 +8,7 @@ namespace ESGI.DesignPattern.Projet.Tests {
         [Fact]
         public void DefaultBuildedProductValues()
         {
-            ProductBuiler builderTest = new ProductBuiler(TEST_ID, TEST_NAME);
+            ProductBuilder builderTest = new ProductBuilder(TEST_ID, TEST_NAME);
             Product expectedProduct = new Product(TEST_ID, TEST_NAME, ProductSize.Medium, new Price(0, Currency.USD), Color.RED);
 
             Product factoryOutput = builderTest.Build();
@@ -27,7 +27,7 @@ namespace ESGI.DesignPattern.Projet.Tests {
             Price newPrice = new Price(20, Currency.USD);
             ProductSize newSize = ProductSize.ExtraLarge;
 
-            ProductBuiler factoryTest = new ProductBuiler(TEST_ID, TEST_NAME);
+            ProductBuilder factoryTest = new ProductBuilder(TEST_ID, TEST_NAME);
             Product factoryOutput = factoryTest.WithPrice(newPrice).WithSize(newSize).Build();
 
             Assert.Equal(newPrice.Value, factoryOutput.Price.Value);
