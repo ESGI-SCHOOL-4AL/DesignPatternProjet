@@ -1,5 +1,5 @@
 namespace ESGI.DesignPattern.Projet {
-    interface IFactory<T> {
+    interface IBuilder<T> {
         T Build();
     }
 }

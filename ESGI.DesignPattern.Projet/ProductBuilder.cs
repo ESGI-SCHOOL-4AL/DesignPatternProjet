@@ -1,6 +1,6 @@
 namespace ESGI.DesignPattern.Projet
 {
-    public class ProductBuiler: IFactory<Product> {
+    public class ProductBuiler: IBuilder<Product> {
         private Product product;
 
         public ProductBuiler(int id, string name) {
